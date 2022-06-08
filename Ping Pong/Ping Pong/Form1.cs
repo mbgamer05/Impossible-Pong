@@ -11,6 +11,7 @@ namespace Ping_Pong
         int timeytick;
         Random random;
         BallXY ballXy;
+
         struct BallXY 
         {
             public int x;
@@ -46,6 +47,7 @@ namespace Ping_Pong
             picWall.Height = ClientSize.Height;
             picBall.Left = (ClientSize.Width / 2) + 40;
             picBall.Top = (ClientSize.Height / 2) + 40;
+
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
@@ -132,12 +134,24 @@ namespace Ping_Pong
             if (pScore >= 10)
             {
                 timer1.Stop();
-                MessageBox.Show("You Win");
+                DialogResult = MessageBox.Show("YOU WIN!", " Play again?", MessageBoxButtons.YesNo);
+
             }
-            if(cScore >= 10)
+            if (cScore >= 10)
             {
                 timer1.Stop();
-                MessageBox.Show("Computer Wins");
+                DialogResult  = MessageBox.Show("Computer Wins!", " Play again?" , MessageBoxButtons.YesNo);
+            }
+            switch (DialogResult)
+            {
+                case DialogResult.Yes:
+                    MessageBox.Show("Ok");
+                    Application.Restart();
+
+                    break;
+                case DialogResult.No:
+                    Application.Exit();
+                    break;
             }
             timeytick = timeytick + 1 / 2;
             ballXy.y = ballXy.y + timeytick;
